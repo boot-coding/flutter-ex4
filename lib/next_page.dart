@@ -16,9 +16,12 @@ class NextPageWidget extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("ID : $_id", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500)),
-            Text("pw : $_pw",style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500)),
+            Text("Welcome to my course", style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700)),
+            SizedBox(height: 10),
+            Text("Hi, $_id", style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600)),
+            SizedBox(height: 50),
           ],
         )
       ), // This trailing comma makes auto-formatting nicer for build methods.
