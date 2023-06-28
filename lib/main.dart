@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 40),
             GestureDetector(
               onTap: () {
-                goLogin();
+                clickLogin();
               },
               child: Container(
                 width: 250,
@@ -97,7 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void goLogin() {
+  //2. 로그인 버튼이 클릭되었을때, 유효성 검사를 하고나서 서버와 통신 수행
+  void clickLogin() {
     print('go login');
     print('id: ${_idController.text}');
     print('pw: ${_pwController.text}');
@@ -110,8 +111,15 @@ class _MyHomePageState extends State<MyHomePage> {
     loginRequest(_idController.text, _pwController.text);
   }
 
-  //서버와 통신합니다
+  //3. 서버와 통신합니다, 실제 코딩할때는 Http 통신을 하는 코드가 작성되어야 합니다. 여기서는 Http 관련 코드는 작성하지 않습니다
   void loginRequest(String id, String pw) {
+   //서버에 데이터를 전달합니다
+    checkDataFromServer(id, pw);
+  }
+
+  //3. 서버의 내부 로직에 해당합니다.
+  @Deprecated("이 함수는 서버에서 동작하는 내부적인 로직입니다. 이해를 돕기위해 임시로 만들어 놓았습니다.")
+  void checkDataFromServer(String id, String pw) {
     if(id == "oojoo" && pw == "1234") {
       print('로그인 성공');
       //get from server
@@ -122,12 +130,13 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  //4. 이해를 돕기위해 작성된 함수입니다. 실제로는 서버가 직접 클라이언트의 함수를 호출하진 않습니다.
   void callbackResponse(User user) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) =>
-                NextPageWidget(_idController.text, _pwController.text))
+                NextPageWidget(user.name, user.password))
     );
   }
 }
