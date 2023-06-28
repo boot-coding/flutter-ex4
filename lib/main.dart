@@ -1,6 +1,8 @@
 import 'package:ex4/next_page.dart';
 import 'package:flutter/material.dart';
 
+import 'model/user.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -99,10 +101,28 @@ class _MyHomePageState extends State<MyHomePage> {
     print('go login');
     print('id: ${_idController.text}');
     print('pw: ${_pwController.text}');
+    //validation check
     if(_idController.text.isEmpty || _pwController.text.isEmpty) {
       print('id와 pw를 입력해주세요');
       return;
     }
+
+    loginRequest(_idController.text, _pwController.text);
+  }
+
+  //서버와 통신합니다
+  void loginRequest(String id, String pw) {
+    if(id == "oojoo" && pw == "1234") {
+      print('로그인 성공');
+      //get from server
+      User loginUser = User("oojoo", "oojooteam@gmail.com", "010-1234-5678");
+      callbackResponse(loginUser);
+    } else {
+      print('로그인 실패');
+    }
+  }
+
+  void callbackResponse(User user) {
     Navigator.push(
         context,
         MaterialPageRoute(
